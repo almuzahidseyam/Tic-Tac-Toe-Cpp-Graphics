@@ -1,7 +1,5 @@
 # Tic-Tac-Toe C++ (graphics.h)
 
-![Tic-Tac-Toe Game Screenshot](screenshot.png)
-
 This project was developed for the **Computer Graphics and Image Processing Sessional (CIT 422)** course at Patuakhali Science and Technology University (PSTU). It is a classic multiplayer Tic-Tac-Toe game implemented in C++ using the graphics.h library.
 
 ## Features
