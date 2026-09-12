@@ -1,0 +1,7 @@
+﻿# CodeBlocks
+*.depend
+*.layout
+bin/
+obj/
+*.exe
+*.rar
