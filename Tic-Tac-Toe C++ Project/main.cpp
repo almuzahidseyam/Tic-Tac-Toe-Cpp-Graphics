@@ -1,5 +1,5 @@
 #include <iostream>
-#include <graphics.h>
+#include "graphics.h"
 #include <conio.h>
 #include <dos.h>
 #include <stdlib.h>
@@ -104,46 +104,40 @@ void highlight_button(int x,int y, int cl) {
 
 int choice_input1()
 {
-	POINT cursor;
 	int xp,yp;
 	while(1)
 	{
-		GetCursorPos(&cursor);
-		xp=cursor.x;
-		yp=cursor.y;
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>XP*0.46-160 && xp<XP*0.46) && (yp>YP*0.69 && yp<YP*0.69+50)) {
-			highlight_button(XP*0.46-150, YP*0.69 +10, WHITE);
-			return 1;
-			break;
+		if (ismouseclick(WM_LBUTTONDOWN)) {
+			getmouseclick(WM_LBUTTONDOWN, xp, yp);
+			if((xp>XP*0.46-160 && xp<XP*0.46) && (yp>YP*0.65 && yp<YP*0.65+50)) {
+				highlight_button(XP*0.46-150, YP*0.65 +10, WHITE);
+				return 1;
+			}
+			if((xp>XP*0.54 && xp<XP*0.54 +160) && (yp>YP*0.65 && yp<YP*0.65+50)) {
+				highlight_button(XP*0.54 +10, YP*0.65 +10, WHITE);
+				return 2;
+			}
 		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>XP*0.54 && xp<XP*0.54 +160) && (yp>XP*0.54 && yp<YP*0.72+50)) {
-			highlight_button(XP*0.54 +10, XP*0.54 +10, WHITE);
-			return 2;
-			break;
-		}
-		Sleep(1);
+		delay(10);
 	}
 }
 
 int choice_input2()	{
-	POINT cursor;
 	int xp,yp;
 	while(1)
 	{
-		GetCursorPos(&cursor);
-		xp=cursor.x;
-		yp=cursor.y;
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>XP*0.65 && xp<XP*0.67 +90) && (yp>YP*0.79 && yp<YP*0.79 +40)) {
-			highlight_button(XP*0.65 +5, YP*0.79 +5, LIGHTCYAN);
-			return 1;
-			break;
+		if (ismouseclick(WM_LBUTTONDOWN)) {
+			getmouseclick(WM_LBUTTONDOWN, xp, yp);
+			if((xp>XP*0.65 && xp<XP*0.67 +90) && (yp>YP*0.75 && yp<YP*0.75 +40)) {
+				highlight_button(XP*0.65 +5, YP*0.75 +5, LIGHTCYAN);
+				return 1;
+			}
+			if((xp>XP*0.68 +100 && xp<XP*0.7 +190) && (yp>YP*0.75 && yp<YP*0.75 +40)) {
+				highlight_button(XP*0.68 +105, YP*0.75 +5, LIGHTCYAN);
+				return 2;
+			}
 		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>XP*0.68 +100 && xp<XP*0.7 +190) && (yp>YP*0.79 && yp<YP*0.79 +40)) {
-			highlight_button(XP*0.68 +105, YP*0.79 +5, LIGHTCYAN);
-			return 2;
-			break;
-		}
-		Sleep(1);
+		delay(10);
 	}
 }
 
@@ -264,50 +258,22 @@ void drawMoves(){
 }
 
 int getnum(){
-	POINT cursor;
 	int xp,yp;
 	while(true)
 	{
-		GetCursorPos(&cursor);
-		xp=cursor.x;
-		yp=cursor.y;
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x1+5 && xp<x3-5) && (yp>y2+30 && yp<y4+20)) {
-			return 1;
-			break;
+		if (ismouseclick(WM_LBUTTONDOWN)) {
+			getmouseclick(WM_LBUTTONDOWN, xp, yp);
+			if((xp>x1 && xp<x3) && (yp>y2 && yp<y4)) return 1;
+			if((xp>x3 && xp<x4) && (yp>y2 && yp<y4)) return 2;
+			if((xp>x4 && xp<x2) && (yp>y2 && yp<y4)) return 3;
+			if((xp>x1 && xp<x3) && (yp>Y1 && yp<y2)) return 4;
+			if((xp>x3 && xp<x4) && (yp>Y1 && yp<y2)) return 5;
+			if((xp>x4 && xp<x2) && (yp>Y1 && yp<y2)) return 6;
+			if((xp>x1 && xp<x3) && (yp>y3 && yp<Y1)) return 7;
+			if((xp>x3 && xp<x4) && (yp>y3 && yp<Y1)) return 8;
+			if((xp>x4 && xp<x2) && (yp>y3 && yp<Y1)) return 9;
 		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x3+5 && xp<x4-5) && (yp>y2+30 && yp<y4+20)) {
-			return 2;
-			break;
-		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x4+5 && xp<x2-5) && (yp>y2+30 && yp<y4+20)) {
-			return 3;
-			break;
-		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x1+5 && xp<x3-5) && (yp>Y1+30 && yp<y2+20)) {
-			return 4;
-			break;
-		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x3+5 && xp<x4-5) && (yp>Y1+30 && yp<y2+20)) {
-			return 5;
-			break;
-		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x4+5 && xp<x2-5) && (yp>Y1+30 && yp<y2+20)) {
-			return 6;
-			break;
-		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x1+5 && xp<x3-5) && (yp>y3+30 && yp<Y1+20)) {
-			return 7;
-			break;
-		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x3+5 && xp<x4-5) && (yp>y3+30 && yp<Y1+20)) {
-			return 8;
-			break;
-		}
-		if(GetAsyncKeyState(VK_LBUTTON) && (xp>x4+5 && xp<x2-5) && (yp>y3+30 && yp<Y1+20)) {
-			return 9;
-			break;
-		}
-		Sleep(1);
+		delay(10);
 	}
 }
 
